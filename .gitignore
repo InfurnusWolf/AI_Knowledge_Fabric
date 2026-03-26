@@ -1,0 +1,61 @@
+# 🔹 Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 🔹 Virtual environments
+venv/
+env/
+.venv/
+
+# 🔹 VS Code
+.vscode/
+
+# 🔹 OS files
+.DS_Store
+Thumbs.db
+
+# 🔹 Logs
+*.log
+
+# 🔹 Environment variables
+.env
+
+# 🔹 Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# 🔹 Model & large binary files
+*.pkl
+*.faiss
+
+# 🔹 Temporary / output files
+*.json
+
+# (Optional: if you want to keep some JSON files like configs, remove above and use specific ignore instead)
+# example:
+# !config.json
+
+# 🔹 HuggingFace / transformers cache
+.cache/
+huggingface/
+
+# 🔹 Streamlit cache
+.streamlit/
+
+# 🔹 Build / dist
+build/
+dist/
+*.egg-info/
+
+# 🔹 IDEs
+.idea/
+
+# 🔹 SQLite (if you ever add DB)
+*.db
+
+# 🔹 PyTorch / model checkpoints
+*.pt
+*.bin
+
+# 🔹 Misc
+*.tmp

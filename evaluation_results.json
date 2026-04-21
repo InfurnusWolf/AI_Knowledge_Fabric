@@ -4,7 +4,13 @@
     "avg_confidence": 0.5866583333333334,
     "low_conf_rate": 0.5833333333333334,
     "hallucination_rate": 0.0,
-    "avg_response_time": 58.288333333333334
+    "avg_response_time": 73.5625,
+    "per_domain_accuracy": {
+      "coding": 1.0,
+      "legal": 0.6666666666666666,
+      "medical": 1.0,
+      "finance": 1.0
+    }
   },
   "per_query": [
     {
@@ -15,7 +21,7 @@
       "confidence": 0.4692,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 44.34
+      "response_time_s": 62.64
     },
     {
       "query": "How do I implement a binary search tree?",
@@ -25,7 +31,7 @@
       "confidence": 0.5483,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 46.05
+      "response_time_s": 62.96
     },
     {
       "query": "What is a REST API?",
@@ -35,7 +41,7 @@
       "confidence": 0.4981,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 52.4
+      "response_time_s": 62.92
     },
     {
       "query": "What is Article 21 of the Indian Constitution?",
@@ -45,7 +51,7 @@
       "confidence": 0.4305,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 41.84
+      "response_time_s": 69.22
     },
     {
       "query": "Explain IPC section 302",
@@ -55,7 +61,7 @@
       "confidence": 0.3727,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 55.11
+      "response_time_s": 8.79
     },
     {
       "query": "What are fundamental rights in India?",
@@ -65,7 +71,7 @@
       "confidence": 0.3911,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 42.28
+      "response_time_s": 71.59
     },
     {
       "query": "What are the symptoms of Type 2 Diabetes?",
@@ -75,7 +81,7 @@
       "confidence": 0.5992,
       "low_confidence": true,
       "hallucinated": false,
-      "response_time_s": 55.99
+      "response_time_s": 79.02
     },
     {
       "query": "How does chemotherapy work?",
@@ -85,7 +91,7 @@
       "confidence": 0.6894,
       "low_confidence": false,
       "hallucinated": false,
-      "response_time_s": 50.56
+      "response_time_s": 23.92
     },
     {
       "query": "What is hypertension?",
@@ -95,7 +101,7 @@
       "confidence": 0.6972,
       "low_confidence": false,
       "hallucinated": false,
-      "response_time_s": 53.21
+      "response_time_s": 71.18
     },
     {
       "query": "What is insider trading?",
@@ -105,7 +111,7 @@
       "confidence": 0.8279,
       "low_confidence": false,
       "hallucinated": false,
-      "response_time_s": 85.37
+      "response_time_s": 122.91
     },
     {
       "query": "Explain compound interest",
@@ -115,7 +121,7 @@
       "confidence": 0.7603,
       "low_confidence": false,
       "hallucinated": false,
-      "response_time_s": 77.36
+      "response_time_s": 124.01
     },
     {
       "query": "What is a mutual fund?",
@@ -125,7 +131,7 @@
       "confidence": 0.756,
       "low_confidence": false,
       "hallucinated": false,
-      "response_time_s": 94.95
+      "response_time_s": 123.59
     }
   ]
 }

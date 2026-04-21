@@ -113,25 +113,83 @@ def evaluate():
 
     # Per-domain breakdown
     print("\nPer-domain accuracy:")
+    domain_accuracies = {}
     for domain in ["coding", "legal", "medical", "finance"]:
         domain_results = [r for r in results if r["expected_domain"] == domain]
         correct        = sum(1 for r in domain_results if r["domain_correct"])
+        ratio          = correct / len(domain_results) if domain_results else 0.0
+        domain_accuracies[domain] = ratio
         print(f"  {domain:10s}: {correct}/{len(domain_results)}")
+
+    metrics = {
+        "domain_accuracy":   domain_accuracy,
+        "avg_confidence":    avg_confidence,
+        "low_conf_rate":     low_conf_rate,
+        "hallucination_rate":hallucination_rate,
+        "avg_response_time": avg_response_time,
+        "per_domain_accuracy": domain_accuracies,
+    }
+
+    # Generate graphs
+    generate_evaluation_plots(metrics, results)
 
     # Save results
     with open("evaluation_results.json", "w") as f:
         json.dump({
-            "metrics": {
-                "domain_accuracy":   domain_accuracy,
-                "avg_confidence":    avg_confidence,
-                "low_conf_rate":     low_conf_rate,
-                "hallucination_rate":hallucination_rate,
-                "avg_response_time": avg_response_time,
-            },
+            "metrics": metrics,
             "per_query": results
         }, f, indent=2)
 
     print("\nSaved to evaluation_results.json")
+
+
+def generate_evaluation_plots(metrics, results):
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("matplotlib not installed; skip plot generation. Install via: pip install matplotlib")
+        return
+
+    output_dir = "evaluation_plots"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # 1. Per-domain accuracy
+    domains = list(metrics["per_domain_accuracy"].keys())
+    domain_values = [metrics["per_domain_accuracy"][d] * 100 for d in domains]
+    plt.figure(figsize=(8, 5))
+    plt.bar(domains, domain_values, color="tab:blue")
+    plt.ylim(0, 100)
+    plt.title("Per-domain Classification Accuracy")
+    plt.ylabel("Accuracy (%)")
+    plt.grid(axis="y", linestyle="--", alpha=0.4)
+    plt.savefig(os.path.join(output_dir, "per_domain_accuracy.png"), bbox_inches="tight")
+    plt.close()
+
+    # 2. Confidence and risk metrics
+    labels = ["Avg Confidence", "Low Conf Rate", "Hallucination Rate"]
+    values = [metrics["avg_confidence"] * 100, metrics["low_conf_rate"] * 100, metrics["hallucination_rate"] * 100]
+    plt.figure(figsize=(8, 5))
+    plt.bar(labels, values, color=["tab:green", "tab:orange", "tab:red"])
+    plt.ylabel("Percent (%)")
+    plt.title("Confidence and Hallucination Metrics")
+    plt.ylim(0, 100)
+    plt.grid(axis="y", linestyle="--", alpha=0.4)
+    plt.savefig(os.path.join(output_dir, "confidence_hallucination_metrics.png"), bbox_inches="tight")
+    plt.close()
+
+    # 3. Response time scatter plot
+    response_times = [r["response_time_s"] for r in results]
+    plt.figure(figsize=(8, 5))
+    plt.scatter(range(1, len(response_times) + 1), response_times, color="tab:purple")
+    plt.plot(range(1, len(response_times) + 1), response_times, alpha=0.35)
+    plt.title("Response Time per Query")
+    plt.xlabel("Query #")
+    plt.ylabel("Time (s)")
+    plt.grid(True, linestyle="--", alpha=0.4)
+    plt.savefig(os.path.join(output_dir, "response_time.png"), bbox_inches="tight")
+    plt.close()
+
+    print(f"Saved plots to {output_dir}")
 
 
 if __name__ == "__main__":
